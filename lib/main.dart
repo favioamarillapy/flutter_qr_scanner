@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "QR Scanner",
       initialRoute: 'home',
+      theme: ThemeData(primarySwatch: Colors.deepPurple),
       routes: {
         'home': ((context) => HomeScreen()),
         'map': ((context) => MapScreen()),
