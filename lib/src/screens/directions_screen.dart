@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_qr_scanner/src/widgets/custom_dismissible.dart';
 import 'package:flutter_qr_scanner/src/providers/scan_list_provider.dart';
 
 class DirectionsScreen extends StatelessWidget {
@@ -10,17 +11,6 @@ class DirectionsScreen extends StatelessWidget {
 
     final scanList = scanListProvider.scanList;
 
-    return ListView.builder(
-      itemCount: scanList.length,
-      itemBuilder: (context, index) => ListTile(
-        leading:
-            Icon(Icons.home_outlined, color: Theme.of(context).primaryColor),
-        title: Text(scanList[index].value),
-        subtitle: Text(scanList[index].id.toString()),
-        trailing: Icon(Icons.keyboard_arrow_right,
-            color: Theme.of(context).primaryColor),
-        onTap: () => {print("onTap")},
-      ),
-    );
+    return CustomDismissible(type: "http");
   }
 }

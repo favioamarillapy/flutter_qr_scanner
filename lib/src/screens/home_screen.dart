@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_qr_scanner/src/providers/scan_list_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_qr_scanner/src/providers/scan_list_provider.dart';
 import 'package:flutter_qr_scanner/src/providers/db_provider.dart';
 import 'package:flutter_qr_scanner/src/providers/ui_provider.dart';
 import 'package:flutter_qr_scanner/src/screens/directions_screen.dart';
@@ -13,10 +13,16 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          elevation: 0,
-          title: Text("History"),
-          actions: [Icon(Icons.delete_forever)]),
+      appBar: AppBar(elevation: 0, title: Text("History"), actions: [
+        IconButton(
+          icon: Icon(Icons.delete_forever),
+          onPressed: () {
+            final scanListProvider =
+                Provider.of<ScanListProvider>(context, listen: false);
+            scanListProvider.deleteAll();
+          },
+        )
+      ]),
       body: _HomeBody(),
       bottomNavigationBar: CustomNavigationBar(),
       floatingActionButton: CustomFloatingButton(),
