@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_qr_scanner/src/models/scan_model.dart';
+import 'package:flutter_qr_scanner/src/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_qr_scanner/src/providers/scan_list_provider.dart';
 
@@ -14,8 +16,14 @@ class CustomFloatingButton extends StatelessWidget {
         final scanListProvider =
             Provider.of<ScanListProvider>(context, listen: false);
 
-        scanListProvider.saveScan("http://localhost.com");
-        scanListProvider.saveScan("gro:15.33,15.66");
+        final barCodeScan = "geo:-25.413613,-57.297989";
+        if (barCodeScan == "-1") {
+          return;
+        }
+
+        final ScanModel scan = await scanListProvider.saveScan(barCodeScan);
+
+        redirect(context, scan);
 
         // String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
         //     "#3D8BEF", "Cancel", false, ScanMode.QR);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_qr_scanner/src/utils/utils.dart';
 import 'package:flutter_qr_scanner/src/providers/scan_list_provider.dart';
 
 class CustomDismissible extends StatelessWidget {
@@ -32,7 +33,7 @@ class CustomDismissible extends StatelessWidget {
           subtitle: Text(scanList[index].id.toString()),
           trailing: Icon(Icons.keyboard_arrow_right,
               color: Theme.of(context).primaryColor),
-          onTap: () => {print("onTap")},
+          onTap: () => redirect(context, scanList[index]),
         ),
       ),
     );
