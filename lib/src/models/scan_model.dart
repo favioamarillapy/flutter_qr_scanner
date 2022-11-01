@@ -2,20 +2,20 @@ import 'dart:convert';
 
 class ScanModel {
   ScanModel({
-    required this.id,
+    this.id,
+    this.type,
     required this.value,
-    required this.type,
   }) {
-    if (value.contains("http")) {
+    if (value!.contains("http")) {
       type = "http";
     } else {
       type = "geo";
     }
   }
 
-  int id;
+  int? id;
+  String? type;
   String value;
-  String type;
 
   factory ScanModel.fromJson(String str) => ScanModel.fromMap(json.decode(str));
 
@@ -23,13 +23,13 @@ class ScanModel {
 
   factory ScanModel.fromMap(Map<String, dynamic> json) => ScanModel(
         id: json["id"],
-        value: json["value"],
         type: json["type"],
+        value: json["value"],
       );
 
   Map<String, dynamic> toMap() => {
         "id": id,
-        "value": value,
         "type": type,
+        "value": value,
       };
 }

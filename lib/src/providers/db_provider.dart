@@ -37,7 +37,7 @@ class DBProvider {
     );
   }
 
-  Future<List<ScanModel>?> getAll(int id) async {
+  Future<List<ScanModel>?> getAll() async {
     final db = await database;
     final response = await db?.query("scans");
 
@@ -55,13 +55,13 @@ class DBProvider {
         : null;
   }
 
-  Future<ScanModel?> getScanByType(String type) async {
+  Future<List<ScanModel>?> getScanByType(String type) async {
     final db = await database;
     final response =
         await db?.query("scans", where: "type=?", whereArgs: [type]);
 
     return response!.isNotEmpty
-        ? ScanModel.fromJson(response.first.toString())
+        ? response.map((e) => ScanModel.fromJson(e.toString())).toList()
         : null;
   }
 
@@ -80,10 +80,16 @@ class DBProvider {
     return response!;
   }
 
-  Future<int> deleteScan(ScanModel scanModel) async {
+  Future<int> deleteScan(int id) async {
     final db = await database;
-    final response =
-        await db?.delete("scans", where: "id=?", whereArgs: [scanModel.id]);
+    final response = await db?.delete("scans", where: "id=?", whereArgs: [id]);
+
+    return response!;
+  }
+
+  Future<int> deleteAllScans() async {
+    final db = await database;
+    final response = await db?.delete("scans");
 
     return response!;
   }
