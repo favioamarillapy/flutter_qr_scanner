@@ -35,20 +35,21 @@ class _HomeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final uiProvider = Provider.of<UiProvider>(context);
+    final scanListProvider =
+        Provider.of<ScanListProvider>(context, listen: false);
     final currentIndex = uiProvider.selectedMenu;
 
     DBProvider.db.database;
-
-    final scanListProvider =
-        Provider.of<ScanListProvider>(context, listen: false);
 
     switch (currentIndex) {
       case 0:
         scanListProvider.getScanByType("geo");
         return MapsScreen();
+
       case 1:
         scanListProvider.getScanByType("http");
         return DirectionsScreen();
+
       default:
         return MapsScreen();
     }
