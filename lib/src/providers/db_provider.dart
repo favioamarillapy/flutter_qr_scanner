@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -51,7 +52,7 @@ class DBProvider {
     final response = await db?.query("scans", where: "id=?", whereArgs: [id]);
 
     return response!.isNotEmpty
-        ? ScanModel.fromJson(response.first.toString())
+        ? ScanModel.fromJson(jsonEncode(response.first))
         : null;
   }
 
@@ -61,7 +62,7 @@ class DBProvider {
         await db?.query("scans", where: "type=?", whereArgs: [type]);
 
     return response!.isNotEmpty
-        ? response.map((e) => ScanModel.fromJson(e.toString())).toList()
+        ? response.map((e) => ScanModel.fromJson(jsonEncode(e))).toList()
         : null;
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_qr_scanner/src/providers/scan_list_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_qr_scanner/src/providers/db_provider.dart';
 import 'package:flutter_qr_scanner/src/providers/ui_provider.dart';
@@ -32,10 +33,15 @@ class _HomeBody extends StatelessWidget {
 
     DBProvider.db.database;
 
+    final scanListProvider =
+        Provider.of<ScanListProvider>(context, listen: false);
+
     switch (currentIndex) {
       case 0:
+        scanListProvider.getScanByType("geo");
         return MapsScreen();
       case 1:
+        scanListProvider.getScanByType("http");
         return DirectionsScreen();
       default:
         return MapsScreen();

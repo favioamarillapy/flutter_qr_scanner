@@ -23,8 +23,8 @@ class ScanListProvider extends ChangeNotifier {
   }
 
   getScanByType(String type) async {
-    final scan = await DBProvider.db.getScanByType(type);
-    scanList = [...?scan];
+    final scans = await DBProvider.db.getScanByType(type);
+    scanList = [...?scans];
     selectedType = type;
     notifyListeners();
   }
