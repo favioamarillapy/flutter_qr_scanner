@@ -11,7 +11,7 @@ class CustomDismissible extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scanListProvider =
-        Provider.of<ScanListProvider>(context, listen: false);
+        Provider.of<ScanListProvider>(context);
     final scanList = scanListProvider.scanList;
 
     return ListView.builder(
